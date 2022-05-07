@@ -2,3 +2,5 @@ PROGRAM PREPARES GRAIN BOUNDARY SEGMENT FILES
 FOR ANALYSIS BY WRITING THEM IN A 10 OR 12  
 COLUMN FORMAT.  MULTIPLE FILES CAN BE 
 CONCATENATED INTO A SINGLE FILE.
+
+In the folder "Example" sample input and output is provided, along with directions for use.
