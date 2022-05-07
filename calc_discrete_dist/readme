@@ -1,5 +1,10 @@
 calculate_discrete_distributions
 
+When a one dimensional disorientation distribution is produced, 
+it can be graphed directly by any application.  However, to 
+visualize the multidiminaional outputs, you need to use 
+the program graph_discrete_distributions.
+
 PROGRAM FOR COMPUTING DISCRETIZED GRAIN BOUNDARY 
 DISTRIBUTIONS. IT CAN COMPUTE 1D DISORIENTATION
 DISTRIBUTIONS, 2D GRAIN BOUNDARY PLANE DISTRIBUTIONS
@@ -12,9 +17,10 @@ SAYLOR ET AL., MET TRANS. 35A (2004) 1981. LINE
 SEGMENT DATA CAN ALSO BE BINNED UNDER THE ASSUMPTION
 THAT THE MICROSTRUCTURE IS COLUMNAR
 
-       !This program combines all prior programs for computing discrete
-       !distributions.  Grain boundary line segment (trace) data is
-       !interpreted stereologically or under the columnar assumption.
-       !Grain boundary triangle data, from 3D studies, is interpreted
-       !as 3D data.  This version uses the full domain of misorientations
-       !for non-cubic structures and improves variable definitions.
+This program combines all prior programs for computing discrete
+distributions.  Grain boundary line segment (trace) data is
+interpreted stereologically or under the columnar assumption.
+Grain boundary triangle data, from 3D studies, is interpreted
+as 3D data.  This version uses the full domain of misorientations
+for non-cubic structures and improves variable definitions.
+
