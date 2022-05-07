@@ -4,15 +4,15 @@ C*****************************************
        implicit none
        include 'common.fi'
 	   
-       write(6,*) '=============================================='
-	   write(6,*) ' PROGRAM PREPARES GRAIN BOUNDARY SEGMENT FILES'
-	   write(6,*) ' FOR ANALYSIS BY WRITING THEM IN A 10 OR 12  '
-	   write(6,*) ' COLUMN FORMAT.  MULTIPLE FILES CAN BE '
-	   write(6,*) ' CONCATENATED INTO A SINGLE FILE.'
-	   write(6,*)
-	   write(6,*) ' rohrer@cmu.edu'	   
-	   write(6,*) ' version 05/07/22'
-       write(6,*) '=============================================='
+       write(6,5) '=============================================='
+	   write(6,5) ' PROGRAM PREPARES GRAIN BOUNDARY SEGMENT FILES'
+	   write(6,5) ' FOR ANALYSIS BY WRITING THEM IN A 10 OR 12  '
+	   write(6,5) ' COLUMN FORMAT.  MULTIPLE FILES CAN BE '
+	   write(6,5) ' CONCATENATED INTO A SINGLE FILE.'
+	   write(6,5)
+	   write(6,5) ' rohrer@cmu.edu'
+	   write(6,5) ' version 05/07/22'
+       write(6,5) '=============================================='
 
        !compile with the make file.  You can also use gfortran main.f -O3 -o condition_segs
        !9/9/14: fix issue with 14 column files
@@ -183,7 +183,7 @@ C*****************************************
         !The section is used when the input file has 10 columns
         if (col_in.eq.10) then
 		 read(32,*,end=200) s(1,i), s(2,i), s(3,i), s(4,i), s(5,i),
-     &	 s(6,i), s(9,i), s(10,i), s(11,i), s(12,i)
+     &	 s(6,i), s(16,i), s(17,i), s(18,i), s(19,i)
         endif
        enddo ! end the i=header+1,nnline loop
 
@@ -208,14 +208,14 @@ C*****************************************
         enddo
        else
         do i=header+1,nnline
-         if ((s(9,i).eq.s(11,i)).and.(s(11,i).eq.s(12,i))) then
+         if ((s(16,i).eq.s(18,i)).and.(s(17,i).eq.s(19,i))) then
           goto 400
          endif
          if ((s(1,i).eq.0.0).and.(s(4,i).eq.0.0)) then
           goto 400
          endif
          write(34,83) s(1,i), s(2,i), s(3,i), s(4,i), s(5,i),
-     &	 s(6,i), s(9,i), s(10,i), s(11,i), s(12,i)
+     &	 s(6,i), s(16,i), s(17,i), s(18,i), s(19,i)
  400     continue
         enddo
        endif
