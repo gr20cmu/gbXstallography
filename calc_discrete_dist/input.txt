@@ -1,0 +1,46 @@
+Nb_TiO2_segs.txt
+12
+1       1      1
+9   9
+1.0
+1   1   1   0   0   0   0
+Nb-doped Titania data 10.1111/j.1551-2916.2005.00759.x
+
+-------------------------------------------------------------------------------
+The input parameters for calc_discrete_dist are above this line.
+All text below the line is for instructions/notes and is not used by the code.
+
+- The first line specifies the name of the file containing the data (string).
+
+¥ The second line specifies the number of columns in the data file (integer).  This is limited to 10 or 12.  Use condition_segments to write a files with a permissible number of columns.
+
+¥ The first element of the third line specifies the set of symmetry operators that are used (integer).
+If Cubic, msym = 3
+If Hexagonal, msym = 2
+If Tetragonal, msym = 1
+If Trigonal, msym = 4
+If Orthorhombic, msym = 5
+
+¥ The second element of the third line specifies the reference frame relating the line segments to the Euler angles (integer).
+If the data are in the HKL default reference frame, rotation = 0
+If the data are in the TSL default reference frame, rotation = 1
+If the data are in the natural reference frame used by D3D, rotation = 2
+
+¥ The third element of the third line specifies the units for the Euler angles (integer).
+If the units are degrees, use radian = 0.
+If the units are radians, use radian = 1.
+
+¥ The fourth line specifies the discretization (integer).  The first number is the number of bins per 90 degrees for the Euler angles.  The second number is the number of bins per 90 degrees for the spherical angles.  The numbers must be greater than 3 and less than 19.
+
+¥ The fifth line is the pixel spacing of the orientation data (real).  This is not critical to the calculation and will only affect the accuracy of the estimate of pixels per line segment.  If you do not know the correct value, use 1.0.
+
+¥ The sixth line has flags to turn on or off different parts of the calculation
+    - first integer: do not/do 0/1 compute the 1D disorientation distribution
+    - second integer: do not/do 0/1 stereologically compute the 2D GBPD
+    - third integer: do not/do 0/1 stereologically compute the 5D GBCD
+    - Fourth integer: do not/do 0/1 compute the 2D GBPD from 3D data
+    - fifth integer: do not/do 0/1  compute the 5D GBCD from 3D data
+    - sixth integer: do not/do 0/1 compute the 2D GBPD assuming columnar structure
+    - seventh integer: do not/do 0/1  compute the 5D GBCD assuming columnar structure
+
+¥ The seventh line is a comment that will be added to the header of the output files (string).

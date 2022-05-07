@@ -1,0 +1,45 @@
+ ! these are reserved for use in subroutines
+
+       real acos2, l1, l2, phi, psi, sf, ss, temp, theta, xz
+       real mo,temp1
+       real a(2)
+       real euler(3), n1(3), n2(3), v(3), vector_out(3), x(3)
+       real delg(3,3), g(3,3), g1(3,3), g2(3,3), g3(3,3)
+       real g1nw(3,3),g2nw(3,3),g3nw(3,3),gtnw(3,3),delgnw(3,3)
+       real gt(3,3), so(3,3), so1(3,3), so2(3,3)
+       real gg1(3,3), gg2(3,3)
+       real op(3,3,24), O(3,3,24)
+
+ ! these are used in main
+
+       real eps,pi,HCD,StepSize,l_tot,tem,x1,x2,y1,y2
+       real length,l_step,l_ave,bin,disor2,mag_ref,dot,p
+       real gbd(72,36,72,18,36),d(2000,2),d_norm(2000,2),sa(2)
+       real pd(18,72)
+       real e1(3),e2(3),e1r(3),e2r(3),nl(3),axis(3),ref(3)
+       real gg(3,3),g_1(3,3),g_2(3,3),so_1(3,3),gg_1(3,3)
+       real so_2(3,3),gg_2(3,3),gg_2t(3,3),dg(3,3)
+       real gg_1t(3,3)
+       real mort(3),n(3),nf(3)
+       real t,templ,mag_dir,avg,pnc,f,area
+
+ ! these are reserved for use in subroutines
+	   integer i, j, k, ii, jj, kk, i_s, ns, nsy
+
+ ! these are used in main
+       integer nsymm,NCol,msym,rotation,radian,CD,CD2
+       integer nnline,header,hash,t_out,limit,bin_num
+       integer i1,i2,i3,i4,i5
+       integer point,blank,ind,ct,c1,c2,c3,c4,c5
+       integer out(7)
+
+ ! these are used in main
+       character*100 keyword
+       character*100 inline
+       character*100 version
+       character*100 comment
+       
+	   common/ const1/ pi, eps
+
+       common/ nsymmetry/ nsymm
+
