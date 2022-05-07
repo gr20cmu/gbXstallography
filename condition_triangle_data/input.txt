@@ -1,0 +1,9 @@
+SmallIn100_TriangleFile.ph
+
+---------------------------------------------------------------------------------
+The input parameters for the program condition_triangle_data are above this line.
+All text below the line is for instructions/notes and is not used by the code.
+
+- The first line specifies the name of the file containing the data.
+
+

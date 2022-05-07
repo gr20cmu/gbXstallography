@@ -1,0 +1,26 @@
+ ! these are reserved for use in subroutines
+	   real euler(3), g(3,3), delg(3,3), g1(3,3), g2(3,3)
+       real g3(3,3), gt(3,3), op(3,3,24), so(3,3), O(3,3,24)
+       real n1(3), n2(3), vector_out(3), v(3), a(2), x(3)
+       real xz, sf, theta, psi, phi, temp, acos2, ss
+ ! these are used in main
+       real e1(3), e2(3), normal(3)
+       real area
+       real pi, eps
+ ! these are reserved for use in subroutines
+	   integer ii, jj, kk, i_s, ns, point
+ ! these are used in main
+	   integer i, j, k
+	   integer radian, msym, nsymm
+       integer hash, header, blank
+       integer nnline, nline
+	   character*100 version
+       character*100 keyword
+       character*100 inline
+       character*11 tempword
+
+	   common/ const1/ pi, eps
+
+       common/ nsymmetry/ nsymm
+
+
