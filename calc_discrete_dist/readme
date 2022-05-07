@@ -1,1 +1,20 @@
+calculate_discrete_distributions
 
+PROGRAM FOR COMPUTING DISCRETIZED GRAIN BOUNDARY 
+DISTRIBUTIONS. IT CAN COMPUTE 1D DISORIENTATION
+DISTRIBUTIONS, 2D GRAIN BOUNDARY PLANE DISTRIBUTIONS
+(GBPDs), AND 5D GRAIN BOUNDARY CHARACTER
+DISTRIBUTIONS (GBCDs).  3D TRIANGLE DATA IS SIMPLY
+DISCRETIZED INTO BINS.  DATA CONSISTING OF GRAIN
+BOUNDARY TRACES OBSERVED ON A SECTION PLANE ARE
+INTERPRETED STEREOLOGICALLY ACCORDING TO 
+SAYLOR ET AL., MET TRANS. 35A (2004) 1981. LINE
+SEGMENT DATA CAN ALSO BE BINNED UNDER THE ASSUMPTION
+THAT THE MICROSTRUCTURE IS COLUMNAR
+
+       !This program combines all prior programs for computing discrete
+       !distributions.  Grain boundary line segment (trace) data is
+       !interpreted stereologically or under the columnar assumption.
+       !Grain boundary triangle data, from 3D studies, is interpreted
+       !as 3D data.  This version uses the full domain of misorientations
+       !for non-cubic structures and improves variable definitions.
