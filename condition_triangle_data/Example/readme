@@ -1,1 +1,26 @@
 
+In this simple example, I condition the file: SmallIn100_TriangleFile.ph,
+written by Dream.3D, by removing all lines where the Euler angles 
+are equal to zero, and writing it to: SmallIn100_TriangleFile_cnd.txt
+Unfortunately, these files are too large to post to GitHub.  You 
+should be able to get zipped versions of these files at:
+http://mimp.materials.cmu.edu/rohrer/documents/gbXstallography/data/
+
+Here is the I/O on the consol.
+(base) gr20MacMin-2:condition_triangle_data gr20$ make
+gfortran -O3 -c -ffixed-line-length-none main.f 
+gfortran  main.o sub.o symmetry.o  -o condition
+(base) gr20MacMin-2:condition_triangle_data gr20$ condition
+=================================================
+ PROGRAM TO READ TRIANGLE DATA, REMOVE LINES 
+ WHERE EULER ANGLES WITH ZERO VALUES ARE FOUND 
+ 
+ rohrer@cmu.edu
+ version 05/07/2022
+=================================================
+I am going to look for data in the file labeled: SmallIn100_TriangleFile.ph                                                                          
+There are  2601863 lines in the data file.
+           5  lines in the header
+ zero Eulers:      465296
+ final number of lines =     2136562
+(base) gr20MacMin-2:condition_triangle_data gr20$ 
