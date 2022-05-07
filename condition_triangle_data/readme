@@ -1,1 +1,16 @@
+Dream.3D makes it possible to export triangles files. 
+These are text files that specify all of the boundaries
+as a set of triangles.  On each line of the file, 
+the Euler angles on either side of the triangle are specified,
+the normal to the triangle in the lab reference frame is specified,
+and the area is listed.  
+Some of the triangle have Euler angles of 0, 0, 0, 
+because one of the orientations is unknown.  These
+create problems later.  This program removes them.
 
+PROGRAM TO READ TRIANGLE DATA, REMOVE LINES 
+WHERE EULER ANGLES WITH ZERO VALUES ARE FOUND 
+
+This version just removes lines with zero Euler angles
+The parts used for filtering based on thresholds are
+commented out.
