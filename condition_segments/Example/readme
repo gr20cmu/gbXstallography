@@ -1,2 +1,69 @@
-Some simple data to test the program for two cases
+As an example of using condition segments, we'll consider the data in five text files SrTiO3_segs_00N.txt, where 2 ≤ N ≤ 5.  
+These data are in the 14 column format, and we want to write then in the 10 column format, concatenated into a single file.  
+For this, we set the parameters in input.txt to:
+
+SrTiO3_segs
+all_SrTiO3_segs.txt
+2
+6
+14
+10
+1
+Some SrTiO3 data from the Grain_Boundary_Data_Archive
+
+See details in input.txt for an explanation of the parameters.
+
+We begin by compiling it using the makefile:
+
+(base) gr20MacMin-2:condition_segments gr20$ make
+gfortran -O3 -c -ffixed-line-length-none main.f 
+gfortran  main.o  -o condition_segs
+
+Then running the executable:
+
+(base) gr20MacMin-2:condition_segments gr20$ condition_segs
+==============================================
+ PROGRAM PREPARES GRAIN BOUNDARY SEGMENT FILES
+ FOR ANALYSIS BY WRITING THEM IN A 10 OR 12  
+ COLUMN FORMAT.  MULTIPLE FILES CAN BE 
+ CONCATENATED INTO A SINGLE FILE.
+
+ rohrer@cmu.edu
+ version 05/07/22
+==============================================
+There are    945 lines in file  2.
+           1  lines in the header
+There are    986 lines in file  3.
+           1  lines in the header
+There are    968 lines in file  4.
+           1  lines in the header
+There are    950 lines in file  5.
+           1  lines in the header
+There are    936 lines in file  6.
+           1  lines in the header
+(base) gr20MacMin-2:condition_segments gr20$ 
+
+This will produced the file: all_SrTiO3_segs.txt
+That will include all segments from the five input files.
+
+In some cases, you might not want to put them in a single file.  For example, if they are part a of 3D stack, then you might 
+want to keep them in separate file to seek triple lines.  In this case, you change the parameters in the input file to read:
+
+SrTiO3_segs
+all_SrTiO3_segs.txt
+2
+6
+14
+10
+0
+Some SrTiO3 data from the Grain_Boundary_Data_Archive
+
+The change in the seventh line from 1 to 0 turns off the concatenation. 
+
+When we run it this time, five ten column files with the names:
+SrTiO3_segs_cnd_00N.txt, where 2 ≤ N ≤ 5, are created.  These have the same information as the original files, but are in the 10 column format.
+
+If you need to check that the information is transferred properly, you can edit the files to only contain a small number of lines.  
+Then, you can easily check to make sure the correct numbers appear in the right places.
+
 
