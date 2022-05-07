@@ -1,6 +1,7 @@
 Dream.3D makes it possible to export triangles files. 
 These are text files that specify all of the boundaries
-as a set of triangles.  On each line of the file, 
+as a set of triangles.  These files can be used to compute
+discrete or continuous distributions.  On each line of the file, 
 the Euler angles on either side of the triangle are specified,
 the normal to the triangle in the lab reference frame is specified,
 and the area is listed.  
