@@ -1,0 +1,35 @@
+# segment file written by condition_segs: version 05/07/22
+# File written by extract_gb_traces: version 03/26/2022                                             
+# Using data from file: small_IN100_002.ang                                                         
+# data from TSL                                                                                     
+# data is on a square grid                                                                          
+# length of step in x direction:    0.250000                                                        
+# length of step in y direction:    0.250000                                                        
+# number of rows:  201                                                                              
+# number of columns in odd numbered rows:  189                                                      
+# number of columns in even numbered rows:  189                                                     
+# maximal number of pixels in each line segments:    9                                              
+# The small IN100 data set available in D3D                                                         
+# There are :     224 grains                                                                        
+# There are :     491 trinodes                                                                      
+# There are :    5610 grain boundary nodes                                                          
+# There are :     606 grain pairs with boundaries                                                   
+# The number of traces subdivided:   26                                                             
+#     59 of    606 boundaries do not have 2 trinodes                                                
+#      1 of    606 boundaries have 0 trinode                                                        
+#      0 of    606 boundaries have 1 trinode                                                        
+#    547 of    606 boundaries have 2 trinodes                                                       
+#     21 of    606 boundaries have 3 trinodes                                                       
+#     34 of    606 boundaries have 4 trinodes                                                       
+#      2 of    606 boundaries have 5 trinodes                                                       
+#      1 of    606 boundaries have 6 trinodes                                                       
+#      0 of    606 boundaries have 7 trinodes                                                       
+#      0 of    606 boundaries have 8 trinodes                                                       
+#  phi1    PHI   phi2   phi1    PHI   phi2       x1       y1       x2       y2                      
+# comment: some IN100 test data                                                                                
+#   phi1     PHI      phi2     phi1     PHI      phi2        x1         y1         x2         y2 
+    1.947    0.514    3.846    0.480    0.690    5.203     16.375      4.375     16.125      4.875
+    3.046    0.735    2.588    1.229    0.549    5.502      3.875      4.625      4.625      5.625
+    1.405    0.405    4.670    0.807    0.437    5.121     13.125      4.625     12.500      6.125
+    1.405    0.405    4.670    0.807    0.437    5.121     12.500      6.125     12.125      7.375
+    0.807    0.437    5.121    3.816    0.409    2.758     14.875      4.625     13.875      5.750
