@@ -1,0 +1,87 @@
+Mod_Mod1
+segments_Ni
+20
+22
+0
+0
+0.200000 
+0.173205
+432
+426
+425
+7
+1.5
+1
+high purity Ni Example for gbXstallography
+25
+150
+6.5
+6.5
+1
+0
+0
+0
+0
+0
+0
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ
+The input parameters for extract_GB_traces are above this line.
+All text below the line is for instructions/notes and is not used by the code.
+
+¥ The first line is the base name of the *.ang file.  The *.ang filenames must have a special format, as in:
+Ni_o_map_NNN.ang, where 'Ni_o_map' is the base name and 'NNN' is an integer, such as '001'.  The base name MUST be 8 characters.
+
+¥ The second line is a base name you pick (40 character limit) where the gb line segments will be written.  For example, if you pick 'segments', the data will be written to file 'segments_[name_of_ang_file].txt'
+
+¥ The third line is the number of the first *.ang file in the sequence, which must must be greater than or equal to zero and less than or equal to 999.  For example, if this is 0, then the first file name is "Ni_o_map_000.ang"
+
+¥ The fourth line is the number of the last file in the sequence, with the same restrictions as the first line.  For example, if this is file 99, then the last file name is "Ni_o_map_099.ang"  If you are processing a single file this number must equal the number on line three.
+
+¥ The fifth line specifies the source of the orientation data.
+   0 = TSL
+   1 = HKL
+   2 = other (HEDM)
+
+¥ The sixth line specifies orientation grid geometry
+   0 = hex grid
+   1 = square
+
+¥ The seventh line is the step distance, in the X direction, in micrometers
+
+¥ The eighth line is the step distance, in the Y direction, in micrometers
+
+¥ the ninth line is the number of rows in the map
+
+¥ The tenth line is the number of columns in odd numbered rows
+
+¥ The eleventh line is the number of columns in even numbered rows
+
+¥ The twelfth line is the length of the longest line segment, in pixels.  Integer (usually between 5 and 10)
+
+¥ The thirteenth line is the maximum deviation of the line segment from the grain boundary position.  Real  (usually between 1.0 and 2.0)
+
+¥ The fourteenth line is the flag for the units of the Euler angles (0=degrees, 1=radian, integer)
+
+¥ The fifteenth line is a comment you can add that is written to output files
+
+¥ The sixteenth line is the x offset, in points, for the postscript output (integer)
+
+¥ The seventeenth line is the y offset, in points, for the postscript output (integer)
+
+¥ The eighteenth line is the x scale factor for postscript output map (real)
+ 
+¥ The nineteenth line is the y scale factor for postscript output map (real)
+
+¥ The twentieth line is the output flag for the images (0=no, 1=yes, integer)
+
+¥ The twentieth first line is the output flag for the grain list (0=no, 1=yes, integer)
+
+¥ The twenty second line is the output flag for the grain ID map (0=no, 1=yes, integer)
+
+¥ The twenty third line is the output flag for the tj node list (0=no, 1=yes, integer)
+
+¥ The twenty fourth line is the output flag for gb node list (0=no, 1=yes, integer)
+
+¥ The twenty fifth line is the output flag for the grain boundary data list (0=no, 1=yes, integer)
+
+¥ The twenty sixth line is the flag for writing grain IDs on the map (0=no, 1=yes, integer)

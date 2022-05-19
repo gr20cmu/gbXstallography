@@ -1,0 +1,60 @@
+ ! these are reserved for use in subroutines
+
+       real acos2, l1, l2, phi, psi, sf, ss, temp, theta, xz
+       real mo,temp1
+       real a(2)
+       real euler(3), n1(3), n2(3), v(3), vector_out(3), x(3)
+       real delg(3,3), g(3,3), g1(3,3), g2(3,3), g3(3,3)
+       real g1nw(3,3),g2nw(3,3),g3nw(3,3),gtnw(3,3),delgnw(3,3)
+       real gt(3,3), so(3,3), so1(3,3), so2(3,3)
+       real gg1(3,3), gg2(3,3)
+       real op(3,3,24), O(3,3,24)
+
+ ! these are used in main
+
+       real eps, pi, xc, yc, XSTEP, YSTEP,t30,tem
+       real ep1x,ep1y,ep2x,ep2y,px,py,dist,length
+       real StartPointX,StartPointY,red,green,blue,redr
+       real LastPointX,LastPointY,OriginPointX,OriginPointY
+       real n1x,n1y,n2x,n2y,n3x,n3y,d12,d13,d23,DistTol
+       real alpha,beta,gamma,eta,max_color,XSc,YSc,del
+       real CenTotX,CenTotY,CentX,CentY
+       real grain(6,10000),map(3000,3000,3),node(30000,6),gb(300000,4)
+       real GBDat(10000,300),trace(200,2),tsg(500,13),osg(100,13)
+       real NodeList(10,2),segment(10000,10),c_seg(25,2),dis(5,3)
+       real NewNode(1000,2)
+       real e1(3),e2(3),vec(3),n_up(3),n_or(3)
+       real g_or(3,3)
+
+ ! these are reserved for use in subroutines
+	   integer i, j, k, ii, jj, kk, i_s, ns, nsy
+
+ ! these are used in main
+       integer nsymm,first,last,nfile,msf,nsf,lsf,point,source,grid,radian
+       integer nnline,header,hash,grains,match,ind,YOff,XOff
+       integer NROWS,NCOLS_ODD,NCOLS_EVEN,nodes,EdgeNodes,new_or
+       integer gbs, DiffNeighbors, boundaries
+       integer i1,i2,i3,i4,i5
+       integer NodeMatch,unconnected,TraceLength,segs,tsgs,ct,osgs
+       integer TJNum,SegMax,FromOrigin,segments,search,out(10)
+       integer position(3), search_fail,NewNodes
+    
+ ! these are used in main
+       character*80 keyword
+       character*100 fname
+       character*100 inline
+       character*100 inline2
+       character*100 version
+       character*80 out_fname
+       character*1 one
+       character*1 two
+       character*1 three
+       character*12 base2
+       character*4 IDLabel
+       character*4 mystring
+       character*80 mystring2
+
+	   common/ const1/ pi, eps
+
+       common/ nsymmetry/ nsymm
+
