@@ -1,7 +1,7 @@
 Mod_Mod1
 segments_Ni
-20
-22
+0
+29
 0
 0
 0.200000 
