@@ -1,5 +1,8 @@
 calculate_discrete_distributions
 
+for examples and sample data, see:
+http://mimp.materials.cmu.edu/rohrer/gbXstallography/calc_discrete_dist/calc_discrete_dist.html
+
 Program to calculate "binned" or discrete distributions
 of 5D grain boundary crytsallography data.
 
