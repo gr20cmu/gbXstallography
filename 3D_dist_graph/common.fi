@@ -1,0 +1,57 @@
+ ! these are reserved for use in subroutines
+
+       real acos2, l1, l2, phi, psi, sf, ss, temp, theta, xz
+       real mo,temp1
+       real a(2)
+       real euler(3), n1(3), n2(3), v(3), vector_out(3), x(3)
+       real delg(3,3), g(3,3), g1(3,3), g2(3,3), g3(3,3)
+       real g1nw(3,3),g2nw(3,3),g3nw(3,3),gtnw(3,3),delgnw(3,3)
+       real gt(3,3), so(3,3), so1(3,3), so2(3,3)
+       real gg1(3,3), gg2(3,3)
+       real op(3,3,24), O(3,3,24)
+
+ ! these are used in main
+
+       real eps, pi, rho_m, rho_p, rho_pSq, ang, bin, TriArea
+       real disor2, TriAreaTotal, BallVolume2D, TotalArea
+       real sum, c, y, t, numTris, sign, chi1, chi2
+       real area,dist_max,dist_min,interval,theta_plot,phi_plot
+       real area_real, energy, curv, vel, velxcurve, dihedral
+       real ang_ref, tem, delta_m, delta_pSq, diff
+       real angles(2)
+       real ax(3),e1(3),e2(3),normal(3),e1r(3),e2r(3)
+       real normal_lab(3),fixedNormal1(3),fixedNormal2(3),ax_ref(3)
+       real axis(3),normal_grain1(3),normal_grain2(3)
+       real vec(3),sym_normal1(3),sym_normal2(3),axn(3)
+       real gg(3,3),so_1(3,3),g_o1(3,3),g_o2(3,3),g_ref(3,3),g_ref_t(3,3)
+       real gFixed(3,3),gFixedT(3,3), gg_1(3,3), so_2(3,3), gg_2(3,3)
+       real g2sT(3,3), dg(3,3), dgT(3,3), diffFromFixed(3,3)
+       real d(2000,2),d_norm(3100,2), dist(3100), err(3100), num(3100)
+       real samplPts(3,3100), tris(10000000,13),eus(10000000,6),Ueus(1000000,6)
+       real BallVolume(7), fixedNormal1_pre(3), NumF(3800)
+       real angs(200),normals(200,3),AxList(200,3)
+
+ ! these are reserved for use in subroutines
+	   integer i, j, k, ii, jj, kk, i_s, ns, nsy
+
+ ! these are used in main
+       integer mode, msym, radian, dist_type
+       integer BallVolumeIndex, projection, numDistinctGBs, errors
+       integer nsymm, point, nnline, header, hash, limit, bin_num
+       integer i_sy, j_sy, j1, blank, ind, ct, num_samplPts
+       integer cnt, in_aperture, num_unique, NumberFaces, NumTri
+       integer i1, i2, i3, i4, i5, i6
+       integer num_misors, point2
+
+ ! these are used in main
+       character*100 keyword
+       character*100 keyword2
+       character*100 inline
+       character*100 version
+       character*11 tempword
+       character*15 name
+
+	   common/ const1/ pi, eps
+
+       common/ nsymmetry/ nsymm
+

@@ -1,0 +1,141 @@
+IN100_triangles.txt
+5
+msym	     radian      Plane/energy/curv/vel/dihedral
+3            1           1
+aperture
+5.0   7.0   3
+1.0      1.0      0.0     39.0
+1
+_110_39
+grid_points_[111]_twist.txt
+0
+
+
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+The input parameters for the program dist_graph are above this line.  Parts of the program implement the procedure described by Glowinski and Moraweic in http://dx.doi.org/10.1007/s11661-014-2325-y.'  Some passages of the code are fortran adaptations of code that can found at: https://github.com/BlueQuartzSoftware/DREAM3D/blob/develop/Source/Plugins/OrientationAnalysis/OrientationAnalysisFilters/FindGBCDMetricBased.cpp
+All text below the line is for instructions/notes and is not used by the code.  05/27/2022.
+
+¥ The first line specifies the name of the file containing the data.
+
+¥ The second line specifies the mode of operation.
+	- mode = 1 -> calculates the distribution of disorientation angles
+	- mode = 2 -> calculates the distribution of grain boundary planes, ignoring disorientation
+	- mode = 5 -> calculates the distribution of grain boundary plane orientations at fixed disorientation
+    - mode = 6 -> calculates the area or property in the 5D space, at any user specified point or points in the 5D space.
+
+¥ The third line labels the parameters on line 4
+
+¥ The first element of the fourth line specifies the set of symmetry operators that are used.
+If Cubic, msym = 3
+If Hexagonal, msym = 2
+If Tetragonal, msym = 1
+If Trigonal, msym = 4
+If Orthorhombic, msym = 5
+
+¥ The second element of the fourth line specifies the units for the Euler angles
+If the units are degrees, use radian = 0.
+If the units are radians, use radian = 1.
+
+¥ The third element of the fourth line specifies if you are plotting a GB plane or property distribution.
+
+If you are plotting an GB plane distribution, use 1.
+If you are plotting an GB energy distribution, use 2.
+If you are plotting an GB curvature distribution, use 3.
+If you are plotting an GB velocity distribution, use 4.
+If you are plotting an GB dihedral angle distribution, use 5.
+If you are plotting an GB velocity¥curvature product, use 6.
+
+¥ The fifth line labels the parameter on line 6
+
+¥ The sixth line specifies the size of the aperture, rho_m, rho_p, and ID.  rho_m is the misorientation aperture, rho_p is the plane orientation aperture, and ID is an integer associated with an allowed combination of rho_m, rho_p.  The permitted combinations, and the integer that corresponds to these combinations, are listed below.  For most cases, '5.0   7.0   3' is appropriate.
+Possible apertures:
+3¡ mis, 7¡ plane:  1
+5¡ mis, 5¡ plane:  2
+5¡ mis, 7¡ plane:  3
+5¡ mis, 8¡ plane:  4
+6¡ mis, 7¡ plane:  5
+7¡ mis, 7¡ plane:  6
+8¡ mis, 8¡ plane:  7
+
+¥ The seventh line specifies the fixed misorientation for mode = 5.  The angle is specified in degrees.
+
+¥ The eighth line specifies the direction of the projection in mode 5.  There are four allowed values:
+1 = [001]
+2 = [110]
+3 = [111]
+4 = [100]
+
+¥ The ninth line specifies a string that will be added to the output filename.  This must be less than 15 characters.
+
+¥ The tenth line:filename containing list of fixed points for mode 6
+
+¥ The eleventh line: 0 suppress error estimate/1 write error estimates.
+
+
+
+Useful misorientations for cutting and pasting:
+1.0      1.0      1.0      5.00     (sigma 1)
+1.0      1.0      1.0     60.00     (sigma 3)
+1.0      0.0      0.0     36.86     (sigma 5)
+1.0      1.0      1.0     38.21     (sigma 7)
+1.0      1.0      0.0     38.94     (sigma 9)
+1.0      1.0      0.0     50.47     (sigma 11)
+1.0      0.0      0.0     22.62     (sigma 13a)
+1.0      1.0      1.0     27.79     (sigma 13b)
+2.0      1.0      0.0     48.19     (sigma 15)
+1.0      0.0      0.0     28.07     (sigma 17a)
+2.0      2.0      1.0     61.92     (sigma 17b)
+1.0      1.0      0.0     26.53     (sigma 19a)
+1.0      1.0      1.0     46.83     (sigma 19b)
+1.0      1.0      1.0     21.78     (sigma 21a)
+2.0      1.0      1.0     44.41     (sigma 21b)
+3.0      1.0      1.0     40.45     (sigma 23)
+1.0      0.0      0.0     16.26     (sigma 25a)
+3.0      3.0      1.0     51.68     (sigma 25b)
+1.0      1.0      0.0     31.59     (sigma 27a)
+2.0      1.0      0.0     35.43     (sigma 27b)
+1.0      0.0      0.0     43.60     (sigma 29a)
+2.0      2.0      1.0     46.40     (sigma 29b)
+1.0      1.0      1.0	   17.90     (sigma 31a)
+2.0      1.0      1.0	   52.20     (sigma 31b)
+1.0      1.0      0.0     20.05     (sigma 33a)
+3.0      1.0      1.0     33.56     (sigma 33b)
+1.0      1.0      0.0     58.99     (sigma 33c)
+2.0      1.0      1.0     34.05     (sigma 35a)
+3.0      3.0      1.0     43.23     (sigma 35b)
+1.0      0.0      0.0     18.92     (sigma 37a)
+3.0      1.0      0.0     43.14     (sigma 37b)
+1.0      1.0      1.0     50.57     (sigma 37c)
+1.0      1.0      1.0     32.20     (sigma 39a)
+3.0      2.0      1.0     50.13     (sigma 39b)
+1.0      0.0      0.0     12.68     (sigma 41a)
+2.0      1.0      0.0     40.88     (sigma 41b)
+1.0      1.0      0.0     55.88     (sigma 41c)
+1.0      1.0      1.0     15.18     (sigma 43a)
+2.0      1.0      1.0     27.91     (sigma 43b)
+3.0      3.0      2.0     60.77     (sigma 43c)
+3.0      1.0      1.0     28.62     (sigma 45a)
+2.0      2.0      1.0     36.87     (sigma 45b)
+2.0      2.0      1.0     53.13     (sigma 45c)
+3.0      3.0      1.0     37.07     (sigma 47a)
+3.0      2.0      0.0     43.66     (sigma 47b)
+1.0      1.0      1.0     43.57     (sigma 49a)
+5.0      1.0      1.0     43.57     (sigma 49b)
+3.0      2.0      2.0     49.23     (sigma 49c)
+
+0.02     -1.0     0.0     30        !This is the [10-10] set
+-1.732   -1.0     0.0     30
+-1.732    1.0     0.0     30
+0.02      1.0     0.0     30
+1.732     1.0     0.0     30
+1.732    -1.0     0.0     30
+1.0      0.02     0.0     30        !This is the [2-1-10] set
+1.0      1.732    0.0     30
+-1.0     1.732    0.0     30
+-1.0     0.02     0.0     30
+-1.0     -1.732   0.0     30
+1.0      -1.732   0.0     30
+
+Used information at:
+https://github.com/BlueQuartzSoftware/DREAM3D/blob/develop/Source/Plugins/OrientationAnalysis/OrientationAnalysisFilters/FindGBCDMetricBased.cpp
+
