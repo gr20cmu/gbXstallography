@@ -1,0 +1,29 @@
+YSZ_3_2.txt
+YSZ_3_2
+subvolume of the YSZ data: https://doi.org/10.1111/jace.18283           
+226
+231
+19
+0.2
+0.2
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ
+The input parameters for voxel_to_pixel are above this line.
+All text below the line is for instructions/notes and is not used by the code.
+
+¥ The first line is the name of the file with the data from D3D.
+
+¥ The second line is the base name of the numbered *.ang files that this program writes.
+
+¥ The third line is a comment that will be written to the .ang files.
+
+¥ The fourth line is the number of pixels in the x direction. (integer)
+
+¥ The fifth line is the number of pixels in the y direction. (integer)
+
+¥ The sixth line is the number of pixels in the z direction. (integer)
+
+¥ The seventh line is the step length, in microns, in the x-direction. (real)
+
+¥ The eighth  line is the step length, in microns, in the y-direction. (real)
+
+

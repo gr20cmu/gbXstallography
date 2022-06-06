@@ -1,0 +1,39 @@
+ ! these are reserved for use in subroutines
+	   real euler(3), g(3,3), delg(3,3), g1(3,3), g2(3,3)
+       real g3(3,3), gt(3,3), op(3,3,24), so(3,3), O(3,3,24)
+       real n1(3), n2(3), vector_out(3), v(3), a(2), x(3)
+       real xz, sf, theta, psi, phi, temp, acos2, ss
+ ! these are used in main
+       real V1(420,420,104,3), V2(420,420,104,3), d(10,10,10)
+       real e1(3), e2(3), e3(3), q(4), q0(4)
+       real g_o1(3,3), g_o2(3,3)
+       real dg(3,3), gtr(3,3)
+       real choice(3)
+       real grain(10000,3),XSTEP,YSTEP
+       real disor2
+       real pi, misor, eps
+       real C,S,sigma,delta,max,tem
+       real xp,yp,zp,sum_dis, min_dis
+ ! these are reserved for use in subroutines
+	   integer ii, jj, kk, i_s, ns
+ ! these are used in main
+	   integer i, j, k, i1,msf,nsf,lsf
+       integer x_s,y_s,z_s
+       integer zero_ct, tot_dis, min_pos(3)
+	   integer msym, nsymm, index(3)
+       integer i_sy, j_sy, num
+       integer XLimit,YLimit,ZLimit
+	   character*100 version
+       character*1 one
+       character*1 two
+       character*1 three
+       character*100 fname
+       character*100 in_fname
+       character*80 comment
+       character*80 keyword
+
+	   common/ const1/ pi, eps
+
+       common/ nsymmetry/ nsymm
+
+
