@@ -1,0 +1,58 @@
+Mod_Mod1
+0
+segments_Ni_triples
+20
+22
+0
+0.200000
+0.173205
+432
+426
+425
+5
+5
+6
+6
+1
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ
+The input parameters for display TJs are above this line.
+All text below the line is for instructions/notes and is not used by the code.
+
+¥ The first line is the base name of the *.ang file.  The *.ang filenames must have a special format, as in:
+Ni_o_map_NNN.ang, where 'Ni_o_map' is the base name and 'NNN' is an integer, such as '001'.
+
+¥ The second line is a mode parameter.  mode = 0 is for a list of unsorted TJs.  mode = 1 is for a list that has been sorted, by sort_shift.
+
+¥ The third line is the base name of the file containing the triple junction segments.'
+
+¥ The fourth line is the number of the first *.ang file in the sequence, which must must be greater than or equal to zero and less than or equal to 999.  For example, if this is 0, then the first file name is "Ni_o_map_000.ang"
+
+¥ The fifth line is the number of the last file in the sequence, with the same restrictions as the first line.  For example, if this is file 99, then the last file name is "Ni_o_map_099.ang"  If you are processing a single file this number must equal the number on line three.
+
+¥ The sixth line specifies orientation grid geometry
+   0 = hex grid
+   1 = square
+
+¥ The seventh line is the step distance, in the X direction, in micrometers
+
+¥ The eighth line is the step distance, in the Y direction, in micrometers
+
+¥ the ninth line is the number of rows in the map
+
+¥ The tenth line is the number of columns in odd numbered rows
+
+¥ The eleventh line is the number of columns in even numbered rows
+
+¥ The twelfth line is the x offset, in points, for the postscript output (integer)
+
+¥ The thirteenth line is the y offset, in points, for the postscript output (integer)
+
+¥ The fourteenth line is the x scale factor for postscript output map (real)
+ 
+¥ The fifteenth line is the y scale factor for postscript output map (real)
+
+¥ The sixteenth line is the flag for the units of the Euler angles (0=degrees, 1=radian, integer)
+
+
+
+
