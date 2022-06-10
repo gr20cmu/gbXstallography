@@ -1,0 +1,21 @@
+segments_Ni
+0
+29
+10
+10
+
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+The input parameters for find_tjs are above this line.
+All text below the line is for instructions/notes and is not used by the code.
+
+¥ The first line is the base name of the file that contains the line segments in the TSL output format, as in: segments_NNN.txt.  
+
+¥ The second line is the number of the first file in the sequence, which must must be greater than or equal to zero and less than or equal to 998.  For example, if this is 0, then the first file name is "segments_000.txt"
+
+¥ The third line is the number of the last file in the sequence, which must must be greater than or equal to one and less than or equal to 999.  For example, if this is 99, then the last file name is "segments_099.txt"
+
+¥ The fourth line is the number of columns in the in the input data file
+
+¥ The fifth line is the number of columns in the output triples file.  The only options implemented are 10 and 12.
+
+the output will be written into files labeled "[base name]_triples_00N.txt"

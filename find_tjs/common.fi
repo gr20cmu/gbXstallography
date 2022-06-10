@@ -1,0 +1,46 @@
+ ! these are reserved for use in subroutines
+
+       real acos2, l1, l2, phi, psi, sf, ss, temp, theta, xz
+       real mo,temp1
+       real a(2)
+       real euler(3), n1(3), n2(3), v(3), vector_out(3), x(3)
+       real delg(3,3), g(3,3), g1(3,3), g2(3,3), g3(3,3)
+       real g1nw(3,3),g2nw(3,3),g3nw(3,3),gtnw(3,3),delgnw(3,3)
+       real gt(3,3), so(3,3), so1(3,3), so2(3,3)
+       real gg1(3,3), gg2(3,3)
+       real op(3,3,24), O(3,3,24)
+
+ ! these are used in main
+
+       real eps, pi
+       real tem, value1, value2, length
+	   real xi1, xf1, yi1, yf1, xi2, xf2, yi2, yf2
+       real e1(3), e2(3), tri(12,3), s(21,70000)
+       real tj_1(70000,5), tj_2(70000,5)
+
+ ! these are reserved for use in subroutines
+       integer i, j, k, ii, jj, kk, i_s, ns, nsy
+
+ ! these are used in main
+       integer nsymm, CD, i1, i2, i3, i4, i5
+	   integer match, nnline, change, start, trips
+	   integer ll, indx, header, hash, col_in, col_out
+	   integer file_n, first, last, msf, nsf, lsf
+       integer ZeroLen, segs
+
+
+ ! these are used in main
+       character*100 version
+	   character*1 one
+	   character*1 two
+	   character*1 three
+	   character*100 keyword
+	   character*100 fname
+	   character*100 fname2
+	   character*40 tempword
+	   character*100 inline
+
+	   common/ const1/ pi, eps
+
+       common/ nsymmetry/ nsymm
+
