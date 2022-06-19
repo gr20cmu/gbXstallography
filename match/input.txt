@@ -1,0 +1,27 @@
+segments_Ni_triples
+0.2
+0
+29
+1
+3
+10
+
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+The input parameters for match are above this line.
+All text below the line is for instructions/notes and is not used by the code.
+
+¥ The first line is the base name of the file that contains the triple junctions in the format written by find_tjs, as in: triples_NNN.txt.  (N is an integer, 0 to 9).
+
+¥ The second line is the spacing between parallel slices
+
+¥ The third line is the number of the first file in the sequence, which must must be greater than or equal to zero and less than or equal to 998.  For example, if this is 0, then the first file name is "triples_000.txt"
+
+¥ The fourth line is the number of the last file in the sequence, which must must be greater than or equal to one and less than or equal to 999.  For example, if this is 99, then the last file name is "triples_099.txt"
+
+¥ The fifth line is the skipping parameter: 1 for no skipping, 2 for skipping every other layer, etc 
+
+¥ The sixth line is the symmetry
+
+¥ The seventh lines the number of columns in the data file.  This must be 10 or 12.
+
+the output will be written into files labeled "matches_NNN.txt"

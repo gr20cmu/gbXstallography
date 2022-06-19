@@ -1,0 +1,45 @@
+ ! these are reserved for use in subroutines
+
+       real acos2, l1, l2, phi, psi, sf, ss, temp, theta, xz
+       real mo,temp1
+       real a(2)
+       real euler(3), n1(3), n2(3), v(3), vector_out(3), x(3)
+       real delg(3,3), g(3,3), g1(3,3), g2(3,3), g3(3,3)
+       real g1nw(3,3),g2nw(3,3),g3nw(3,3),gtnw(3,3),delgnw(3,3)
+       real gt(3,3), so(3,3), so1(3,3), so2(3,3)
+       real gg1(3,3), gg2(3,3)
+       real op(3,3,24), O(3,3,24)
+
+ ! these are used in main
+
+       real eps, pi
+       real slice, dx, dy, length, angle
+       real tri_1(12,3,15000), tri_2(12,3,15000), tl(6,15000)
+       real clos(5,5)
+       real e1_1(3),e2_1(3),e3_1(3), e1_2(3),e2_2(3),e3_2(3)
+       real g1_1(3,3),g2_1(3,3),g3_1(3,3),g1_2(3,3),g2_2(3,3),g3_2(3,3)
+       real dg(3,3),min_disor(3),ax(3)
+ ! these are reserved for use in subroutines
+       integer i, j, k, ii, jj, kk, i_s, ns, nsy,is,js
+
+ ! these are used in main
+       integer first, last, skip, msym, nsymm, cols, file_n
+       integer msf, nsf, lsf, nnline_1, nnline_2
+       integer i1,i2,i3,i4, counter
+       integer header, hash, n_1, n_2, indx
+
+ ! these are used in main
+       character*80 keyword
+       character*100 inline
+       character*100 version
+       character*80 fname1
+       character*80 fname2
+       character*80 fname3
+       character*1 one
+       character*1 two
+       character*1 three
+
+	   common/ const1/ pi, eps
+
+       common/ nsymmetry/ nsymm
+
