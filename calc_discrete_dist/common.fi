@@ -14,8 +14,8 @@
 
        real eps,pi,HCD,StepSize,l_tot,tem,x1,x2,y1,y2
        real length,l_step,l_ave,bin,disor2,mag_ref,dot,p
-       real gbd(72,36,72,18,36),d(2000,2),d_norm(2000,2),sa(2)
-       real pd(18,72)
+       real gbd(72,36,72,36,72),d(2000,2),d_norm(2000,2),sa(2)
+       real pd(36,72)
        real e1(3),e2(3),e1r(3),e2r(3),nl(3),axis(3),ref(3)
        real gg(3,3),g_1(3,3),g_2(3,3),so_1(3,3),gg_1(3,3)
        real so_2(3,3),gg_2(3,3),gg_2t(3,3),dg(3,3)

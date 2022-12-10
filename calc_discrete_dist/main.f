@@ -18,7 +18,7 @@ C*****************************************
        write(6,1) 'THAT THE MICROSTRUCTURE IS COLUMNAR'
        write(6,1) ' '
 	   write(6,1) 'rohrer@cmu.edu'
-	   write(6,1) 'version 04/09/2022'
+	   write(6,1) 'version 12/10/2022'
        write(6,1) '================================================='
 	   
        !This program combines all prior programs for computing discrete
@@ -28,8 +28,10 @@ C*****************************************
        !as 3D data.  This version uses the full domain of misorientations
        !for non-cubic structures and improves variable definitions.
 
-	   version = 'version 04/09/2022' !corrected trigonal sym operators, and
+	   !version = 'version 04/09/2022'!corrected trigonal sym operators, and
                                       !problem with DisG routine in subs2
+       version = 'version 12/10/2022' !fixed dimensions of the gbd array to
+                                      !compute for resolutions .gt. 9
 
        !some constants that might be useful
        pi = 4.0*atan(1.0)
