@@ -14,7 +14,7 @@
  ! these are used in main
 
        real eps, pi, avg,degrad
-       real AxAng(9,4),pd(18,72),gbd(72,36,72,18,36)
+       real AxAng(9,4),pd(36,72),gbd(72,36,72,36,72)
        real AA(9),aad(72,36,72)
        real summrd,maxmrd,minmrd,sum,theta_plot,phi_plot
        real sa(2),n(3),nf(3),ax_ref(3),ax(3),n_plot_1(3)

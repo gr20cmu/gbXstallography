@@ -9,13 +9,14 @@ C*****************************************
        write(6,1) 'DISTRIBUTIONS FROM DISCRETIZED DATA '
 	   write(6,1) ' '
 	   write(6,1) 'rohrer@cmu.edu'
-	   write(6,1) 'version 04/09/2022'
+	   write(6,1) 'version 12/10/2022'
        write(6,1) '================================================='
 	   
-	   version = 'version 04/09/2022'
+	   !version = 'version 04/09/2022'
        !For single 2D plots, use DS_1
        !for 5D plots, provide options for different symmetries.
-
+       version = 'version 12/10/2022' !fixed dimensions of the gbd array to
+                                      !compute for resolutions .gt. 9
 
        !some constants that might be useful
        pi = 4.0*atan(1.0)
@@ -36,7 +37,7 @@ C*****************************************
  9     format(A,A,A,f4.2,1x,f4.2,1x,f4.2,A)
  10    format(A,A,A,f4.2,1x,f4.2,1x,f4.2,A)
  11    format(A,f5.2,2X,f5.2,2X,f5.2,2X,f6.2,2X)
- 12    format(A,I1,1x,A,A,f5.2,1x,f6.2,1x,f5.2,A)
+ 12    format(A,I1,1x,A,A,f6.2,1x,f7.2,1x,f6.2,A)
 
 
        !The program requires a file, 'input.txt' that specifies all the parameters
