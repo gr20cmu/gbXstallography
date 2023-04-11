@@ -37,11 +37,13 @@
  ! these are used in main
        integer mode, msym, radian, dist_type
        integer BallVolumeIndex, projection, numDistinctGBs, errors
-       integer nsymm, point, nnline, header, hash, limit, bin_num
+       integer nsymm, point, header, hash, limit, bin_num
        integer i_sy, j_sy, j1, blank, ind, ct, num_samplPts
        integer cnt, in_aperture, num_unique, NumberFaces, NumTri
-       integer i1, i2, i3, i4, i5, i6
+       integer i2, i3, i4, i5, i6
        integer num_misors, point2
+       
+       integer*4  nnline,i1
 
  ! these are used in main
        character*100 keyword

@@ -14,10 +14,10 @@ C*****************************************
 	   write(6,4) ' DISORIENTATION ANGLE DISTRIBUTION'
 	   write(6,4) ' '
 	   write(6,4) ' rohrer@cmu.edu'
-	   write(6,4) ' version 05/27/2022'
+	   write(6,4) ' version 04/10/2023'
        write(6,4) '================================================='
 	   
-	   version = 'version 05/27/2022'
+	   version = 'version 04/10/2023'
        !Note: if there are more and 10 million representations
        !of triangles within the aperture, the program will crash.
        !if this is the problem, the fix is to increase the dimensions
@@ -25,11 +25,14 @@ C*****************************************
        !This program synthesizes many of the functions previously available in
        !programs: disorientation_calculator, KDA_2d_graph, KDA_graph, and 
        !KDA_points.
-       !The 1D disorientation distribution is set to work only for numbers
-       !and areas of boundaries.
        !The 2D grain boundary plane distibution is set up to work only for cubic
        !and hexagonal crystals.
        !The error estimation in 2D cases is incorrect and should not be used.
+       !version 02/06/2023: adds functionality to the 1D distribution, which
+       !can now be used to plot properties in addition to areas, by adding
+       !an appropriate normalization scheme and file naming scheme
+       !version 04/10/2023: fixed a problem that occurs for 2D distributions (mode 2)
+       !when there are more than 10 million triangles.
 
        !useful constants defined here
        pi = 4.0*atan(1.0)
@@ -51,6 +54,7 @@ C*****************************************
   22   format(A,A,A,A,f6.3,1x,f8.3,1x,f8.3)
   23   format(f6.2,1x,f10.4,1x,I12,1x,f10.4)
   24   format(I5,f8.2,1x,f10.2,1x,I9,1x,I8,f10.2)
+  25   format(f5.1,6x,F9.4,5x,I7)
 
        !this section reads the user specified parameters in the file, input.txt
        open(21, file='input.txt', status='old') ! Open the file
@@ -175,23 +179,42 @@ C*****************************************
         d(i1,2)=0.0
        enddo
        tris=0.0
-       !open the file for the results
-       open(30, file=keyword(1:point)//trim(name)//'_dist.txt',status='unknown')
+       !open the file for the output
+        if (dist_type.eq.1) then !This case is for a GB plane distribution
+         open(30, file=keyword(1:point)//trim(name)//'_area_dist.txt',status='unknown')
+        endif
+        if (dist_type.eq.2) then !This case is for a GB energy distribution
+         open(30, file=keyword(1:point)//trim(name)//'_energy_dist.txt',status='unknown')
+        endif
+        if (dist_type.eq.3) then !This case is for a GB curvature distribution
+         open(30, file=keyword(1:point)//trim(name)//'_curv_dist.txt',status='unknown')
+        endif
+        if (dist_type.eq.4) then !This case is for a GB velocity distribution
+         open(30, file=keyword(1:point)//trim(name)//'_vel_dist.txt',status='unknown')
+        endif
+        if (dist_type.eq.5) then !This case is for the GB dihedral angle distribution
+         open(30, file=keyword(1:point)//trim(name)//'_dihed_dist.txt',status='unknown')
+        endif
+        if (dist_type.eq.6) then !This case is for a GB velocity * curvature distribution
+         open(30, file=keyword(1:point)//trim(name)//'_vxcur_dist.txt',status='unknown')
+        endif
        !open the file with the data
        open(41, file=keyword, status='old')
-       write(30,5)'# written by dist_graph, version: ',version
-       write(30,5)'# based on data in file: ',trim(keyword)
-       write(30,4)'# the following lines are the header of the source file'
-       do i1=1,header
-        read(41, 4) inline ! read a line of the header
-        write(30, 4)inline ! write that line into the output file
-       enddo! closes i1=1,header
+        write(30,5)'# written by dist_graph, version: ',version
+        write(30,5)'# based on data in file: ',trim(keyword)
+        write(30,4)'# the following lines are the header of the source file'
+        do i1=1,header
+         read(41, 4) inline ! read a line of the header
+         write(30, 4)inline ! write that line into the output file
+        enddo! closes i1=1,header
        blank = 0  ! Initialize counter for lines with zero Euler angles
        !this is the main loop over all lines of data
        do i1=header+1,nnline
         if (dist_type.eq.1) then !This case is for a GB plane distribution
          read(41,*) e1(1), e1(2), e1(3), e2(1), e2(2), e2(3), normal_lab(1), normal_lab(2), normal_lab(3), area_real
          area=area_real
+         !open the file for the results
+         open(30, file=keyword(1:point)//trim(name)//'_area_dist.txt',status='unknown')
         endif
         if (dist_type.eq.2) then !This case is for a GB energy distribution
          read(41,*) e1(1), e1(2), e1(3), e2(1), e2(2), e2(3), normal_lab(1), normal_lab(2), normal_lab(3), area_real, energy
@@ -268,26 +291,56 @@ C*****************************************
        close(41)
 
        !here we compute and write the distribution
-       ct=nnline-header-blank             ! ct is the lines of useful data
-       ! The next four lines normalize the data
-       do i1=1,bin_num                    ! loop over each bin
-        d_norm(i1,1)=d(i1,1)/TotalArea ! divide area by the total area
-        d_norm(i1,2)=d(i1,2)/float(ct)    ! divide number by the total number
-       enddo
-       !these statements write header information
-       write(6,4)' '
-       write(30,4)'# '
-       write(6,4)'Disorientation distribution: rotation angle, area fraction, and number fraction'
-       write(30,4)'# Disorientation distribution: rotation angle, area fraction, and number fraction'
-       write(6,4)' '
-       write(30,4)'# '
-       write(6,4)'degrees    area       number'
-       write(30,4)'  degrees  area       number'
-       !these statements write each line of the distribution
-       do i1=1,bin_num
-		write(30,10)i1*bin, d_norm(i1,1),d_norm(i1,2)
-        write(6,10)i1*bin, d_norm(i1,1),d_norm(i1,2)
-       enddo ! closes the i1=0,bin_num loop
+       ct=nnline-header-blank            ! ct is the lines of useful data
+       ! The next lines normalize the data
+       if (dist_type.eq.1) then
+        do i1=1,bin_num                  ! loop over each bin
+         d_norm(i1,1)=d(i1,1)/TotalArea  ! divide area by the total area
+         d_norm(i1,2)=d(i1,2)/float(ct)  ! divide number by the total number
+        enddo
+       else
+        do i1=1,bin_num                  ! loop over each bin
+         if (d(i1,2).ne.0) then
+          d_norm(i1,1)=d(i1,1)/d(i1,2)   ! divide area by the number of observations
+          d_norm(i1,2)=d(i1,2)           ! set number in each bin
+         else                            ! account for the fact that a bin might be empty
+          d_norm(i1,1)=0.0
+          d_norm(i1,2)=0.0
+         endif
+        enddo
+       endif
+       if (dist_type.eq.1) then          ! this case is for the area
+        !these statements write header information for the area case
+        write(6,4)' '
+        write(30,4)'# '
+        write(6,4)'Disorientation distribution: rotation angle, area fraction, and number fraction'
+        write(30,4)'# Disorientation distribution: rotation angle, area fraction, and number fraction'
+        write(6,4)' '
+        write(30,4)'# '
+        write(6,4)'degrees    area       number'
+        write(30,4)'  degrees  area       number'
+        !these statements write each line of the distribution
+        do i1=1,bin_num
+         write(30,10)i1*bin, d_norm(i1,1),d_norm(i1,2)
+         write(6,10)i1*bin, d_norm(i1,1),d_norm(i1,2)
+        enddo ! closes the i1=0,bin_num loop
+       else                             ! this case is for property distributions
+        !these statements write header information for other properties
+        write(6,4)' '
+        write(30,4)'# '
+        write(6,4)'Property distribution: rotation angle, mean value, and number of observations'
+        write(30,4)'# Property distribution: rotation angle, mean value, and number of observations'
+        write(6,4)' '
+        write(30,4)'# '
+        write(6,4)'degrees       mean        number'
+        write(30,4)'  degrees     mean        number'
+        !these statements write each line of the distribution
+        do i1=1,bin_num
+         write(30,25)i1*bin, d_norm(i1,1),int(d_norm(i1,2))
+         write(6,25)i1*bin, d_norm(i1,1),int(d_norm(i1,2))
+        enddo ! closes the i1=0,bin_num loop
+
+       endif
        close(30) ! closes the output file
 
        goto 9000
@@ -328,59 +381,42 @@ C*****************************************
         num(i1)=0.0
        enddo
 
-       open(41, file=keyword, status='old') ! open the file and read the header
-       do i1=1,header
-        read(41, "(a)") inline ! read a line of the header
-       enddo! ends i1=1,header loop
-
-       write(6,4)'reading data'
-       totalArea = 0.0
-       do i1=header+1,nnline !read all data to the array tris
-        if (dist_type.eq.1) then !This case is for a GB plane distribution
-         read(41,*) tris(i1,1),tris(i1,2),tris(i1,3),tris(i1,4),tris(i1,5),tris(i1,6),tris(i1,7),tris(i1,8),tris(i1,9),tris(i1,10)
-         area=tris(i1,10)
-        endif
-        if (dist_type.eq.2) then !This case is for a GB energy distribution
-         read(41,*) tris(i1,1),tris(i1,2),tris(i1,3),tris(i1,4),tris(i1,5),tris(i1,6),tris(i1,7),tris(i1,8),tris(i1,9),tris(i1,10),tris(i1,11)
-         area=abs(tris(i1,11))
-        endif
-        if (dist_type.eq.3) then !This case is for a GB curvature distribution
-         read(41,*) tris(i1,1),tris(i1,2),tris(i1,3),tris(i1,4),tris(i1,5),tris(i1,6),tris(i1,7),tris(i1,8),tris(i1,9),tris(i1,10),tris(i1,11),tris(i1,12)
-         area=abs(tris(i1,12))
-        endif
-        if (dist_type.eq.4) then !This case is for a GB velocity distribution
-         read(41,*) tris(i1,1),tris(i1,2),tris(i1,3),tris(i1,4),tris(i1,5),tris(i1,6),tris(i1,7),tris(i1,8),tris(i1,9),tris(i1,10),tris(i1,11),tris(i1,12),tris(i1,13)
-        area=abs(tris(i1,13))
-        endif
-
-        if (tris(i1,1).eq.0.00.and.tris(i1,2).eq.0.00.and.tris(i1,3).eq.0.00) then
-         goto 2500 ! Sends it to the next line
-        else
-         continue
-        endif
-        if (tris(i1,4).eq.0.00.and.tris(i1,5).eq.0.00.and.tris(i1,6).eq.0.00) then
-         goto 2500 ! Sends it to the next line
-        else
-         continue
-        endif
-        totalArea=totalArea+area
-
-2500    continue
-       enddo
-       close(41)
 
        write(6,4)'computing distribution'
        do j1=1,num_samplPts  ! this is a loop over all grid points
         sum = 0.0 !zero the counters for each grid point
         c = 0.0
         numTris = 0.0
-        do i1=header+1,nnline
-         e1(1)=tris(i1,1)    ! here we assign the variables to their conventional names
-         e1(2)=tris(i1,2)    ! to be consistent with borrowed code below.
-         e1(3)=tris(i1,3)
-         e2(1)=tris(i1,4)
-         e2(2)=tris(i1,5)
-         e2(3)=tris(i1,6)
+
+        totalArea = 0.0
+        open(41, file=keyword, status='old') ! open the file and read the header
+        do i1=1,header
+         read(41, "(a)") inline ! read a line of the header
+        enddo! ends i1=1,header loop
+
+        do i1=1,nnline-header
+
+         if (dist_type.eq.1) then !This case is for a GB plane distribution
+          read(41,*) e1(1),e1(2),e1(3),e2(1),e2(2),e2(3),normal_lab(1),normal_lab(2),normal_lab(3),area
+         endif
+         if (dist_type.eq.2) then !This case is for a GB energy distribution
+          read(41,*) e1(1),e1(2),e1(3),e2(1),e2(2),e2(3),normal_lab(1),normal_lab(2),normal_lab(3),area,energy
+          area=abs(energy)
+         endif
+         if (dist_type.eq.3) then !This case is for a GB curvature distribution
+          read(41,*)e1(1),e1(2),e1(3),e2(1),e2(2),e2(3),normal_lab(1),normal_lab(2),normal_lab(3),area,energy,curv
+          area=abs(curv)
+         endif
+         if (dist_type.eq.4) then !This case is for a GB velocity distribution
+          read(41,*)e1(1),e1(2),e1(3),e2(1),e2(2),e2(3),normal_lab(1),normal_lab(2),normal_lab(3),area,energy,curv,vel
+          area=abs(vel)
+         endif
+      
+         if (e1(1).eq.0.00.and.e1(2).eq.0.00.and.e1(3).eq.0.00) goto 2500
+         if (e2(1).eq.0.00.and.e2(2).eq.0.00.and.e2(3).eq.0.00) goto 2500
+        
+         totalArea=totalArea+area
+
          ! If the Euler angles are provided in units of degrees, these
 		 ! lines convert them to radians
 	     if (radian.eq.0) then
@@ -391,21 +427,6 @@ C*****************************************
          else
           continue
 	     endif
-         normal_lab(1)=tris(i1,7)
-         normal_lab(2)=tris(i1,8)
-         normal_lab(3)=tris(i1,9)
-         if (dist_type.eq.1) then !This case is for a GB plane distribution
-          area=tris(i1,10)
-         endif
-         if (dist_type.eq.2) then !This case is for a GB energy distribution
-          area=abs(tris(i1,11))
-         endif
-         if (dist_type.eq.3) then !This case is for a GB curvature distribution
-          area=abs(tris(i1,12))
-         endif
-         if (dist_type.eq.4) then !This case is for a GB velocity distribution
-          area=abs(tris(i1,13))
-         endif
 
         !The Euler angles are converted to 3x3 orientation matrices, g_o1 and g_o2.
          call EToG(e1,g_o1)
@@ -413,7 +434,6 @@ C*****************************************
          fixedNormal1(1)=samplPts(1,j1)
          fixedNormal1(2)=samplPts(2,j1)
          fixedNormal1(3)=samplPts(3,j1)
-
 
          do i_sy=1,nsymm             ! loop over all symmetry elements
           call MToV(g_o1, normal_lab, normal_grain1)
@@ -452,13 +472,14 @@ C*****************************************
           endif
 
          enddo  !This closes the i_sy=1,nsymm loop
-
+ 2500    continue
         enddo    ! This closes i1=header+1,nnline loop
+        close(41)
 
         dist(j1)=sum ! assigns the total area at this sample point
         num(j1)=numTris ! assigns number of energy values added at this sample point
 
-        if (mod(j1,50).eq.0) then
+        if (mod(j1,20).eq.0) then
          write(6,13) 'At grid point ',j1,' of ',num_samplPts
         endif
 
