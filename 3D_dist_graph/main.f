@@ -14,10 +14,10 @@ C*****************************************
 	   write(6,4) ' DISORIENTATION ANGLE DISTRIBUTION'
 	   write(6,4) ' '
 	   write(6,4) ' rohrer@cmu.edu'
-	   write(6,4) ' version 04/10/2023'
+	   write(6,4) ' version 07/31/2023'
        write(6,4) '================================================='
 	   
-	   version = 'version 04/10/2023'
+	   version = 'version 07/31/2023'
        !This program implements the calculations originally described by
        !Glowinski and Moraweic, 2014,http://dx.doi.org/10.1007/s11661-014-2325-y
        !Parts of the code were adapted from Dream.3D
@@ -36,6 +36,8 @@ C*****************************************
        !an appropriate normalization scheme and file naming scheme
        !version 04/10/2023: fixed a problem that occurs for 2D distributions (mode 2)
        !when there are more than 10 million triangles.
+       !version 07/31/2023: fixed problem with counting the number of distinct grain
+       !faces around line 836
 
        !useful constants defined here
        pi = 4.0*atan(1.0)
@@ -831,7 +833,7 @@ C*****************************************
          Ueus(NumberFaces,6)=eus(1,6)
          do i3=2,num_unique
           do i4=1,NumberFaces
-           diff=eus(i3,1)-Ueus(i4,1)+eus(i3,2)-Ueus(i4,2)+eus(i3,3)-Ueus(i4,3)+eus(i3,4)-Ueus(i4,4)+eus(i4,5)-Ueus(i4,5)+eus(i3,6)-Ueus(i4,6)
+           diff=abs(eus(i3,1)-Ueus(i4,1))+abs(eus(i3,2)-Ueus(i4,2))+abs(eus(i3,3)-Ueus(i4,3))+abs(eus(i3,4)-Ueus(i4,4))+abs(eus(i3,5)-Ueus(i4,5))+abs(eus(i3,6)-Ueus(i4,6))
            diff=abs(diff)
            if (diff.lt.0.01) then
             goto 5200
