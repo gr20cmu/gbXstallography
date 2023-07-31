@@ -18,6 +18,9 @@ C*****************************************
        write(6,4) '================================================='
 	   
 	   version = 'version 04/10/2023'
+       !This program implements the calculations originally described by
+       !Glowinski and Moraweic, 2014,http://dx.doi.org/10.1007/s11661-014-2325-y
+       !Parts of the code were adapted from Dream.3D
        !Note: if there are more and 10 million representations
        !of triangles within the aperture, the program will crash.
        !if this is the problem, the fix is to increase the dimensions
