@@ -1,0 +1,65 @@
+ ! version 08/11/2023
+ ! these are reserved for use in subroutines
+
+       real acos2, l1, l2, phi, psi, sf, ss, temp, theta, xz
+       real mo,temp1,step0,x01,x02,r01,r02,r03,r04,r05
+       real sigma,delta,Co,Si,maxchoice
+       real x1,y1,x2,y2,omapA(1000,1000,6),omapB(1000,1000,6)
+       real a(2),q(4),q0(4),choice(3)
+       real euler(3), n1(3), n2(3), v(3), vector_out(3), x(3)
+       real delg(3,3), g(3,3), g1(3,3), g2(3,3), g3(3,3)
+       real g1nw(3,3),g2nw(3,3),g3nw(3,3),gtnw(3,3),delgnw(3,3)
+       real gt(3,3), so(3,3), so1(3,3), so2(3,3)
+       real gg1(3,3), gg2(3,3)
+       real op(3,3,24), O(3,3,24)
+
+ ! these are used in main
+
+       real eps,pi,length,avg,gbavg
+       real vec(3),angles(2)
+       real e1(3),e2(3),e3(3),tang(3),tl_s(3)
+       real e1_r(3),e2_r(3),e3_r(3)
+       real g_1(3,3),g_2(3,3),g_3(3,3)
+       real gg_1(3,3),gg_2(3,3),gg_3(3,3),so_1(3,3)
+       real nf(3),sa(2)
+       real pd(36,144),gbpd(36,144)
+       real norm1(3), norm2(3), norm3(3)
+          
+
+ ! these are reserved for use in subroutines
+       integer i, j, k, ii, jj, kk, i_s, ns, nsy
+       integer header0,hash0,msf,nsf,lsf
+       integer rad0,xmax0,ymax0
+       integer NNNot0(4),NNNot0Sum
+       integer*8 nnline0
+
+ ! these are used in main
+       integer nsymm, header, nnline,TJNum,CD,CD2,msym
+       integer i1,i2,c4,c5,point,LessThanTJNum
+       integer NumObs2(36,144),NumGBs2(36,144)
+      
+ ! for testing
+
+
+
+
+
+ ! these are reserved for use in subroutines
+       character*100 inline0
+       character*100 fname0
+       character*100 keyword0
+       character*10 extension0
+       character*1 one
+       character*1 two
+       character*1 three
+
+ ! these are used in main
+       character*100 keyword
+       character*100 inline
+       character*100 version
+       character*100 comment
+
+	   common/ const1/ pi, eps
+
+       common/ nsymmetry/ nsymm
+

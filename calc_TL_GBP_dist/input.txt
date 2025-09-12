@@ -1,0 +1,8 @@
+triples_ZrO2.txt
+3
+9   9
+
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+Line 1:  Name of the file containing the triple line data
+Line 2:  Symmetry selector (3= cubic)
+Line 3:  discretization parameters
