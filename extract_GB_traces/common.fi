@@ -18,10 +18,11 @@
        real LastPointX,LastPointY,OriginPointX,OriginPointY
        real n1x,n1y,n2x,n2y,n3x,n3y,d12,d13,d23,DistTol
        real alpha,beta,gamma,eta,max_color,XSc,YSc,del
+       real DelX1,DelY1,DelX2,DelY2,Diff
        real CenTotX,CenTotY,CentX,CentY
        real grain(6,10000),map(3000,3000,3),node(30000,6),gb(300000,4)
        real GBDat(10000,300),trace(200,2),tsg(500,13),osg(100,13)
-       real NodeList(10,2),segment(10000,10),c_seg(25,2),dis(5,3)
+       real NodeList(10,2),segment(16000,11),c_seg(25,2),dis(5,3)
        real NewNode(1000,2)
        real e1(3),e2(3),vec(3),n_up(3),n_or(3)
        real g_or(3,3)
@@ -37,7 +38,7 @@
        integer i1,i2,i3,i4,i5
        integer NodeMatch,unconnected,TraceLength,segs,tsgs,ct,osgs
        integer TJNum,SegMax,FromOrigin,segments,search,out(10)
-       integer position(3), search_fail,NewNodes
+       integer position(3), search_fail,NewNodes,GB_N_Count
     
  ! these are used in main
        character*80 keyword

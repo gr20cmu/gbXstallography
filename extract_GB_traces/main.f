@@ -8,10 +8,10 @@ C*****************************************
 	   write(6,1) ' PROGRAM TO EXTRACT GB TRACES FROM EBSD MAPS '
 	   write(6,1) ' '
 	   write(6,1) ' rohrer@cmu.edu'
-	   write(6,1) ' version 04/12/2022'
+	   write(6,1) ' version 12/22/2022'
        write(6,1) '================================================='
 	   
-	   version = 'version 04/12/2022'
+	   version = 'version 12/22/2022'
        !This version is set for a maximum of 10,000 grains. If the image has more
        !than this number, increase the dimensions of 'grain' in common.
        !Similarly, there must be fewer than 30,000 trinodes and 100,000 boundary nodes
@@ -22,6 +22,13 @@ C*****************************************
        !Pixels with 0 0 0 Euler angles are assigned grain ID zero, and boundaries with
        !these fields are ignored.
        !04/12/22: updated symmetry.f (to correct trigonal) sub2.f (to improved DisG)
+       !12/21/22: The program sometimes produces duplicate line segments.  This occurs
+       !when two different GBs around a small grain are approximated by the same segment.
+       !This version eliminates such segments, which are small and don't contribute much
+       !and also confuse the triple junction detection in later analysis steps.
+       !12/22/22: There was a problem with the three node case - there are times when
+       !only a single line should be drawn.  This case is detected so incorrect lines are
+       !not drawn.
 
        !This version works, but will ignore a few relatively rare cases.
        ! - It ignores some very short segments on complex boundaries.  Such boundaries
@@ -31,7 +38,10 @@ C*****************************************
        ! - It misrepresented the shape of peninsular grains that have thicknesses
        !   that are less than or equal to two pixel spacings.
        ! - if a boundary has an odd number of nodes greater than three, it is skipped.  There
-       !   are very few such boundaries.
+       !   are very few such boundaries, but no line is drawn in this case.  It appears these
+       !   cases mostly arise from fragmented grains - where disconnected peices of the same
+       !   grain occur and have the same ID.  Rather than try to handle the ≥ 5 node case,
+       !   it is probably better to assign different grain IDs to each fragment.
        ! - If a boundary has a single node, it is skipped. There are very few such boundaries.
        !   To account for this case, find the gb node furthest from the single node, and make
        !   this a new node.  Then find the connecting lines.
@@ -59,7 +69,7 @@ C*****************************************
   9    format(3I8)
   10   format(8x,f6.3,A,f6.3,4x,f6.3,A,f6.3)
   11   format(f6.3,A,f6.3,4x,f6.3,A,f6.3,4x,f6.3,A,f6.3)
-  12   format(2f10.5,3I8)
+  12   format(2f10.5,4I8)
   13   format(25I6)
   14   format(6f7.3,4f9.3)
   15   format(2f8.2,A)
@@ -227,7 +237,7 @@ C*****************************************
         enddo
         !initialize the segment matrix
         do i1=1,10000
-         do i2=1,10
+         do i2=1,11
           segment(i1,i2)=0.0
          enddo
         enddo
@@ -832,7 +842,7 @@ C*****************************************
         ! along the path of binodes.  Several different geometries are
         ! accounted for in different sections.
         !------------------------------------------------------------------
-
+    
         write(6,1)'finding grain boundary trace segments ...'
         segments=0
         NewNodes=0
@@ -845,16 +855,19 @@ C*****************************************
          if (int(GBDat(i1,4)).lt.2) then !ignore boundaries that do not have 2 or more TJ nodes
           goto 1000
          endif
+         !write(6,*)mod(int(GBDat(i1,4)),2)
          if (mod(int(GBDat(i1,4)),2).ne.0) then !ignore boundaries that have an odd number of TJ nodes
           goto 1000
          endif
          if (int(GBDat(i1,4)).gt.10) then !ignore boundaries with more than 10 TJ nodes
           goto 1000
          endif
+
          !condition to eliminate the very short 1 to 2 pixel long gbs on GBs with ≥ 4 nodes
          if ((GBDat(i1,3)/GBDat(i1,4)).lt.1.5.and.GBDat(i1,4).gt.2.0) then
           goto 1000
          endif
+
          !Start at a node, find the closest GB node, make a line.  At every step, check
          !if you are close to one of the other nodes of the same boundary.  If you are close
          !to a node, draw a line and start search at a new node.  If not, find the
@@ -1072,8 +1085,14 @@ C*****************************************
        !This next section considers only cases where a grain pair has three nodes.
        !This seems to happen on square grids.  Find the two closest nodes - make
        !a segment, then connect the second to the most distant.
-    
+
+       ! This is not working in all cases.  sometimes extra lines are drawn
+       ! Basically, drawing the second segment is a mistake - do not draw this one
+
+
+
        do i1=1,boundaries ! loop over all identified boundaries
+        !goto 1050 when I skip the three node case, no extra lines but not all lines.
         trace=0.0
         dis=0.0
         c_seg=0.0
@@ -1081,13 +1100,13 @@ C*****************************************
         if (int(GBDat(i1,4)).ne.3) then !ignore boundaries that do not have 3 TJ nodes
          goto 1050
         endif
-        n1x=node(int(GBDat(i1,4+1)),1)
+        n1x=node(int(GBDat(i1,4+1)),1)!these are the coordinates of the three nodes
         n1y=node(int(GBDat(i1,4+1)),2)
         n2x=node(int(GBDat(i1,4+2)),1)
         n2y=node(int(GBDat(i1,4+2)),2)
         n3x=node(int(GBDat(i1,4+3)),1)
         n3y=node(int(GBDat(i1,4+3)),2)
-        vec(1)=abs(n1x-n2x)
+        vec(1)=abs(n1x-n2x) !find lengths between 1 and 2, 1 and 3, and 2 and 3
         vec(2)=abs(n1y-n2y)
         vec(3)=0
         call VLen(vec,d12) ! get length of vector
@@ -1338,6 +1357,21 @@ C*****************************************
         goto 1002
        endif
  1010  continue
+
+       !122222: the branch of code between here and 1020 was not working
+       !When you have a third node, there are time when it should  not be
+       !connected (this is caused by quad nodes).  To detect these cases,
+       !check to see of there are there more than three unused gb nodes.
+       !if there are, keep going.  If not, skip this brance and goto 1020
+        GB_N_Count=0
+        do i5=1,TraceLength ! check all gb nodes
+         if (trace(i5,2).eq.1.0) then  !if 1.0, this GB node has not been used
+          GB_N_Count=GB_N_Count+1  !goto next gb node
+         endif
+        enddo
+        if (GB_N_Count.le.3) then
+         goto 1020
+        endif
 
         StartPointX=node(int(dis(2,2)),1) !the start coordinate is the coordinate of the first node
         StartPointY=node(int(dis(2,2)),2)
@@ -1825,8 +1859,47 @@ C*****************************************
         write(43,20)'# ',ct,' of ',boundaries,' boundaries have 8 trinodes'
         !should write all the parameters to the header here
         write (43,1)'#  phi1    PHI   phi2   phi1    PHI   phi2       x1       y1       x2       y2'
+
+        !This is the section of code that looks for and eliminates duplicates.
+
+        ct=0
         do i1=1,segments
-         write(43,14)segment(i1,1),segment(i1,2),segment(i1,3),segment(i1,4),segment(i1,5),segment(i1,6),segment(i1,7),segment(i1,8),segment(i1,9),segment(i1,10)
+         do i2=i1+1,segments
+         DelX1=abs(segment(i1,7)-segment(i2,7))
+         DelY1=abs(segment(i1,8)-segment(i2,8))
+         DelX2=abs(segment(i1,9)-segment(i2,9))
+         DelY2=abs(segment(i1,10)-segment(i2,10))
+         Diff=DelX1+DelY1+DelX2+DelY2
+
+         if (Diff.lt.0.1) then
+          ct=ct+2
+          segment(i1,11)=1.0 !this flag in column 11 means it is a duplicate
+          segment(i2,11)=1.0
+         endif
+         !the coordinates might be reversed
+         DelX1=abs(segment(i1,7)-segment(i2,9))
+         DelY1=abs(segment(i1,8)-segment(i2,10))
+         DelX2=abs(segment(i1,9)-segment(i2,7))
+         DelY2=abs(segment(i1,10)-segment(i2,8))
+         Diff=DelX1+DelY1+DelX2+DelY2
+
+         if (Diff.lt.0.1) then
+          ct=ct+2
+          segment(i1,11)=1.0
+          segment(i2,11)=1.0
+         endif
+
+         enddo
+        enddo
+       
+        write(6,3)'I found and eliminated ',ct,' duplicates.'
+        !Note that while the duplicates will not be written to the output, they are
+        !still in the images, but should not cause a problem there.
+
+        do i1=1,segments
+         if(segment(i1,11).ne.1.0) then
+          write(43,14)segment(i1,1),segment(i1,2),segment(i1,3),segment(i1,4),segment(i1,5),segment(i1,6),segment(i1,7),segment(i1,8),segment(i1,9),segment(i1,10)
+         endif
         enddo
         close(43)
   
@@ -2074,7 +2147,7 @@ C*****************************************
           write(41,2)'# written by extract_GB_traces, ',version
           write(41,1)'#        X         Y    GID1    GID2    GID3'
           do i1=1,nodes
-          w rite(41,12)node(i1,1),node(i1,2),int(node(i1,3)),int(node(i1,4)),int(node(i1,5))
+          write(41,12)node(i1,1),node(i1,2),int(node(i1,3)),int(node(i1,4)),int(node(i1,5)),int(node(i1,6))
           enddo
           close(41)
          endif
